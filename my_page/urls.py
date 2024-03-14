@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from horoscope import views
+from horoscope import views as horoscope_view
+from week_days import views as weekdays_view
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('horoscope/leo', views.leo),
+    path('horoscope/leo', horoscope_view.leo),
+    path('todo_week/monday', weekdays_view.monday)
 ]

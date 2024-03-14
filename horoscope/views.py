@@ -5,3 +5,4 @@ from django.http import HttpResponse
 
 def leo(request):
     return HttpResponse('<h3>Sign of zodiac "Leo"</h3>')
+
