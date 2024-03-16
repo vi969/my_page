@@ -18,7 +18,7 @@ zodiac_dict = {
 }
 
 
-def get_ifo_sign_zodiac(request, sign_zodiac:str):
+def get_ifo_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac)
     if description:
         return HttpResponse(f'<h2>Information about sign of zodiac "{sign_zodiac}:"<p>{description}</p>')
@@ -30,7 +30,7 @@ def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
     zodiac_list = list(zodiac_dict)
 
     if num_zodiac > len(zodiac_list):
-        return HttpResponseNotFound(f'<h3>Wrong sign zodiac:{name_zodiac}</h3>')
+        return HttpResponseNotFound(f'<h3>Wrong sign zodiac:{num_zodiac}</h3>')
     else:
         name_zodiac = zodiac_list[num_zodiac -1]
         return HttpResponseRedirect(f'/horoscope/{name_zodiac}')
