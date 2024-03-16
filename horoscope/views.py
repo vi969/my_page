@@ -28,9 +28,10 @@ def index(request):
     ul_zodiac = f'<ul>{li_item}</ul>'
     return HttpResponse(ul_zodiac)
 
+
 def get_ifo_sign_zodiac(request, sign_zodiac: str):
-    response = render_to_string("horoscope/info_zodiac.html")
-    return HttpResponse(response)
+    return render(request, "horoscope/info_zodiac.html")
+
 
 def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
     zodiac_list = list(zodiac_dict)
