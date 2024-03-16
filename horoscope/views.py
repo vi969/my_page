@@ -31,11 +31,8 @@ def index(request):
 
 
 def get_ifo_sign_zodiac(request, sign_zodiac: str):
-    description = zodiac_dict.get(sign_zodiac)
-    if description:
-        return HttpResponse(f'<h2>Information about sign of zodiac "{sign_zodiac}:"<p>{description}</p>')
-    else:
-        return HttpResponseNotFound(f'<h4>Sign {sign_zodiac} is not exists</h4>')
+    response = render_to_string('horoscope/info_zodiac.html')
+    return HttpResponse(response)
 
 
 def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
