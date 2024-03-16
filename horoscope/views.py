@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
-
 # Create your views here.
 
 zodiac_dict = {
@@ -12,7 +11,7 @@ zodiac_dict = {
     'cancer': 'Рак - четвёртый знак зодиака, Луна (с 22 июня по 22 июля).',
     'leo': ' Лев - <i>пятый знак зодиака</i>, солнце (с 23 июля по 21 августа).',
     'virgo': 'Дева - шестой знак зодиака, планета Меркурий (с 22 августа по 23 сентября).',
-    'libra': 'Весы - седьмой знак зодиака, планета Венера (с 24 сентября по 23 октября).',
+    '': 'Весы - седьмой знак зодиака, планета Венера (с 24 сентября по 23 октября).',
     'scorpio': 'Скорпион - восьмой знак зодиака, планета Марс (с 24 октября по 22 ноября).',
     'sagittarius': 'Стрелец - девятый знак зодиака, планета Юпитер (с 23 ноября по 22 декабря).',
     'capricorn': 'Козерог - десятый знак зодиака, планета Сатурн (с 23 декабря по 20 января).',
@@ -22,18 +21,16 @@ zodiac_dict = {
 
 def index(request):
     zodiac_list = list(zodiac_dict)
-    sign_li = ''
+    li_item = ''
     for sign in zodiac_list:
-        link = reverse('zodiac', args=(sign,))
-        sign_li += f'<li><a href={link}>{sign.title()}</li>'
-    ul_list = f'<ul>{sign_li}</ul>'
-    return HttpResponse(ul_list)
-
+        redirect_url = reverse('zodiac', args=[sign])
+        li_item += f'<li><a href="{redirect_url}">{sign}<a/></li>'
+    ul_zodiac = f'<ul>{li_item}</ul>'
+    return HttpResponse(ul_zodiac)
 
 def get_ifo_sign_zodiac(request, sign_zodiac: str):
-    response = render_to_string('horoscope/info_zodiac.html')
+    response = render_to_string("horoscope/info_zodiac.html")
     return HttpResponse(response)
-
 
 def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
     zodiac_list = list(zodiac_dict)
@@ -42,5 +39,5 @@ def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
         return HttpResponseNotFound(f'<h3>Wrong sign zodiac:{num_zodiac}</h3>')
     else:
         name_zodiac = zodiac_list[num_zodiac -1]
-        redirect_url = reverse('zodiac', args=(name_zodiac, ))
+        redirect_url = reverse('zodiac', args=(name_zodiac,))
         return HttpResponseRedirect(redirect_url)
