@@ -43,5 +43,5 @@ def get_ifo_sign_zodiac_by_num(request, num_zodiac:int):
         return HttpResponseNotFound(f'<h3>Wrong sign zodiac:{num_zodiac}</h3>')
     else:
         name_zodiac = zodiac_list[num_zodiac -1]
-        redirect_url = reverse('zodiac', args=(name_zodiac, ))
+        redirect_url = reverse('zodiac', args=(name_zodiac,))
         return HttpResponseRedirect(redirect_url)
